@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sourabh Sonker • Data & ML Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Original styles from your index.html with requested changes applied */
+    :root {
+      --bg: #f7f7fa;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #4f46e5;
+      --primary-700: #4338ca;
+      --accent: #22d3ee;
+      --ring: rgba(79, 70, 229, .25);
+      --card-glow: linear-gradient(135deg, #7c3aed, #22d3ee, #4f46e5);
+      --shadow: 0 10px 30px rgba(2, 6, 23, .08);
+      --shadow-strong: 0 20px 50px rgba(2, 6, 23, .12);
+      --border: rgba(2, 6, 23, .08);
+      --code: #0b1020;
+      --link: #2563eb;
+      --chip: #eef2ff;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0b1020;
+      --panel: #0f172a;
+      --text: #e5e7eb;
+      --muted: #cbd5e1;
+      --primary: #8b5cf6;
+      --primary-700: #7c3aed;
+      --accent: #22d3ee;
+      --ring: rgba(139, 92, 246, .35);
+      --card-glow: linear-gradient(135deg, #22d3ee, #8b5cf6, #06b6d4);
+      --shadow: 0 10px 30px rgba(2, 6, 23, .45);
+      --shadow-strong: 0 25px 60px rgba(2, 6, 23, .6);
+      --border: rgba(148, 163, 184, .18);
+      --code: #020617;
+      --link: #93c5fd;
+      --chip: #1f2937;
+    }
+
+    html[data-theme="light"] .nav,
+    html[data-theme="light"] footer {
+      background: #f1f1f4;
+    }
+
+    /* Base */
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(34, 211, 238, .14), transparent 60%),
+        radial-gradient(1000px 500px at 110% 10%, rgba(139, 92, 246, .12), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    /* Layout */
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 70px 0
+    }
+
+    .section h2 {
+      font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2rem);
+      margin: 0 0 18px;
+      letter-spacing: .2px;
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    /* Navbar */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(1.2) blur(8px);
+      background: color-mix(in oklab, var(--bg) 78%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px
+    }
+
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 800;
+      letter-spacing: .3px
+    }
+
+    .brand .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #22d3ee, #8b5cf6, #22d3ee);
+      box-shadow: 0 0 0 4px var(--ring);
+      animation: spin 5s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      padding: 0;
+      margin: 0
+    }
+
+    .nav a {
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 10px
+    }
+
+    .nav a:hover {
+      background: color-mix(in oklab, var(--panel) 82%, transparent)
+    }
+
+    /* Toggle */
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle .knob {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fde68a, #f59e0b);
+      box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .05);
+      transition: transform .35s ease;
+    }
+
+    html[data-theme="dark"] .toggle .knob {
+      transform: translateX(18px);
+      background: radial-gradient(circle at 30% 30%, #93c5fd, #3b82f6);
+    }
+
+    .toggle .track {
+      width: 40px;
+      height: 20px;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--panel) 80%, #0000);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .toggle .track::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 999px;
+      background: radial-gradient(40% 80% at 0% 50%, rgba(34, 211, 238, .25), transparent 60%),
+        radial-gradient(40% 80% at 100% 50%, rgba(139, 92, 246, .25), transparent 60%);
+      filter: blur(8px);
+      opacity: .7;
+      pointer-events: none;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 40px
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 36px;
+      align-items: center
+    }
+
+    @media (max-width: 860px) {
+      .hero-wrap {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+      line-height: 1.15;
+      margin: 0 0 12px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 26px
+    }
+
+    .chip {
+      font-size: .9rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--border);
+    }
+
+    .cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(180deg, var(--primary), var(--primary-700));
+      color: white;
+      border-color: color-mix(in oklab, var(--primary) 40%, #000);
+      box-shadow: 0 10px 30px color-mix(in oklab, var(--primary) 35%, transparent);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong)
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(.99)
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 22px;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: clip;
+      isolation: isolate;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 24px;
+      background: var(--card-glow);
+      z-index: -1;
+      filter: blur(18px);
+      opacity: .45;
+      transition: opacity .35s ease;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    }
+
+    .hero-card:hover::before {
+      opacity: .75;
+      animation: pulse 1.8s ease-in-out infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        filter: blur(14px)
+      }
+
+      50% {
+        filter: blur(28px)
+      }
+    }
+
+    /* Sections & grids */
+    .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .col-12 {
+      grid-column: span 12
+    }
+
+    .col-6 {
+      grid-column: span 6
+    }
+
+    .col-4 {
+      grid-column: span 4
+    }
+
+    @media (max-width: 1000px) {
+      .col-4 {
+        grid-column: span 6
+      }
+    }
+
+    @media (max-width: 720px) {
+
+      .col-6,
+      .col-4 {
+        grid-column: span 12
+      }
+    }
+
+    /* Card */
+    .card {
+      position: relative;
+      border-radius: 18px;
+      overflow: clip;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .35s ease, border-color .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-strong);
+      border-color: color-mix(in oklab, var(--primary) 35%, var(--border))
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 19px;
+      z-index: -1;
+      background: var(--card-glow);
+      filter: blur(20px);
+      opacity: .25;
+      transition: opacity .35s ease;
+    }
+
+    .card:hover::after {
+      opacity: .6;
+      animation: halo 2s ease-in-out infinite
+    }
+
+    @keyframes halo {
+
+      0%,
+      100% {
+        filter: blur(16px)
+      }
+
+      50% {
+        filter: blur(30px)
+      }
+    }
+
+    .card-body {
+      padding: 16px 16px 18px
+    }
+
+    .card h3 {
+      margin: 6px 0 6px;
+      font-size: 1.1rem
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted)
+    }
+
+    .thumb {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      background: radial-gradient(80% 60% at 50% 40%, rgba(34, 211, 238, .15), transparent),
+        radial-gradient(80% 60% at 60% 60%, rgba(139, 92, 246, .15), transparent);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform .5s ease;
+    }
+
+    .card:hover .thumb img {
+      transform: scale(1.07)
+    }
+
+    /* Collapse details */
+    details {
+      margin-top: 10px;
+      border-top: 1px dashed var(--border);
+      padding-top: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    summary::marker {
+      color: var(--primary)
+    }
+
+    /* Lists/Badges */
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 0
+    }
+
+    .badge {
+      font-size: .78rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--primary) 16%, transparent);
+      border: 1px solid color-mix(in oklab, var(--primary) 40%, var(--border));
+    }
+
+    /* Certificate list */
+    .cert {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .cert a.btn {
+      padding: 8px 12px
+    }
+
+    /* Contact */
+    .contact {
+      background: radial-gradient(800px 400px at 30% -10%, rgba(34, 211, 238, .12), transparent 60%),
+        radial-gradient(600px 300px at 110% 20%, rgba(139, 92, 246, .12), transparent 60%),
+        var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    @media (max-width: 860px) {
+      .row {
+        grid-template-columns: 1fr
+      }
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: color-mix(in oklab, var(--panel) 94%, transparent);
+      color: var(--text);
+      outline: none;
+      box-shadow: inset 0 0 0 1px transparent, 0 0 0 0 var(--ring);
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 6px var(--ring)
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
+      text-align: center
+    }
+
+    /* Utilities */
+    .spacer {
+      height: 12px
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .nowrap {
+      white-space: nowrap
+    }
+
+    .link-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px
+    }
+
+    .kpis {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px
+    }
+
+    .kpi {
+      font-size: .78rem;
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1px dashed var(--border);
+      background: color-mix(in oklab, var(--panel) 90%, transparent)
+    }
+
+    .sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0
+    }
+
+    /* Footer Icons */
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      /* Adjust the space between icons */
+      margin-bottom: 20px;
+    }
+
+    .footer-links img {
+      height: 32px;
+      /* Adjust the size of the icons */
+      width: auto;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .footer-links a:hover img {
+      transform: scale(1.15);
+      /* Makes the icon slightly bigger on hover */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container wrap">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Sourabh Sonker</span>
+      </div>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certs">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button id="themeToggle" class="toggle" aria-label="Toggle dark/light">
+        <span class="track"></span><span class="knob"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <h1>Full-Spectrum Data Scientist <span
+            style="background:linear-gradient(90deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">building
+            predictive
+            models</span> and strategic insights.</h1>
+        <p class="muted">I transform raw data into intelligent, production-ready solutions. My expertise spans the full
+          data lifecycle: I begin with deep-dive analytics in Excel and SQL, architect automated Python data pipelines,
+          and craft intuitive Power BI dashboards for strategic decision-making. I then take it a step further,
+          engineering and deploying scalable machine learning models with robust MLOps practices to drive real-world
+          business impact.</p>
+        <div class="chips">
+          <span class="chip">Excel (Dashboards, Pivot, Power Query)</span>
+          <span class="chip">SQL (CTEs, Window Fxns)</span>
+          <span class="chip">Python (Pandas, NumPy)</span>
+          <span class="chip">ML (XGBoost, LSTM, SHAP)</span>
+          <span class="chip">NLP (Transformers, LDA)</span>
+          <span class="chip">Power BI (DAX)</span>
+          <span class="chip">MLOps (AWS, CI/CD, MLflow, DVC)</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="assets\SOURABH SONKER RESUME.pdf" target="_blank" rel="noreferrer">Download
+            Resume</a>
+          <a class="btn" id="emailLink" href="mailto:sourabhsonker17@gmail.com">Email Me</a>
+          <a class="btn" href="https://www.linkedin.com/in/sourabh-sonker-620600236/" target="_blank"
+            rel="noreferrer">LinkedIn</a>
+          <a class="btn" href="https://wa.me/918447727696" target="_blank" rel="noreferrer">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3 style="margin:0 0 10px">Core Competencies</h3>
+        <div class="kpis">
+          <div class="kpi">20+ End-to-End Projects</div>
+          <div class="kpi">Data Modeling & Analytics</div>
+          <div class="kpi">Business Intelligence & Viz</div>
+          <div class="kpi">Machine Learning & MLOps</div>
+        </div>
+        <div class="spacer"></div>
+        <p class="muted" style="margin:0">Focused on building and deploying robust, data-driven solutions that deliver
+          measurable business value.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+      <div style="max-width: 180px; margin-bottom: 20px;">
+        <img src="profile images/pp.jpg" alt="Profile Photo"
+          style="border-radius: 120px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+      </div>
+      <h2 style="text-align: center;">About</h2>
+      <p class="muted" style="max-width: 720px; text-align: center;">I am a Data Scientist with an engineer's mindset
+        for problem-solving. My foundation in Mechanical Engineering provided me with a rigorous training in analytical
+        thinking, mathematical modeling, and systems analysis. During my studies, I discovered my true passion lies not
+        in designing physical systems, but in architecting intelligent systems from data.
+        Following this passion, I dedicated the past year to an intensive, self-driven curriculum focused on the full
+        data science lifecycle. This portfolio is the result: a collection of over 20 end-to-end projects demonstrating
+        my ability to move fluidly from deep-dive SQL analytics and Python scripting to building and deploying
+        production-grade machine learning models. I am now eager to apply my unique blend of engineering discipline and
+        hands-on data expertise to solve complex business challenges.</p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Projects</h2>
+      <p class="muted">Click “Details” on any card to expand. Click on "Github" to Open Github Repository.</p>
+
+      <!-- A) Excel Projects -->
+      <h3 style="margin:26px 0 12px">A) Excel Projects</h3>
+      <div class="grid">
+        <!-- 1 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="A business intelligence dashboard with charts and graphs"
+              src="project thumbnail\Interactive Sales Performance Dashboard.png" /></div>
+          <div class="card-body">
+            <h3>Interactive Sales Performance Dashboard</h3>
+            <p>BI-style Excel dashboard for KPI tracking (Sales, Profit, Orders) with PivotTables, Slicers, and
+              storytelling visuals.</p>
+            <div class="badges"><span class="badge">Excel</span><span class="badge">Pivot & Slicers</span><span
+                class="badge">Time-series</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Top states: California & New York</li>
+                <li>Tech category most profitable</li>
+                <li>Seasonality peaks: Nov–Dec</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Superstore_Sales_Dashboard_Project"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="card col-4">
+          <div class="thumb"><img
+              alt="People collaborating around a table with sticky notes representing customer segments"
+              src="project thumbnail\RFM Customer Segmentation (Excel).png" />
+          </div>
+          <div class="card-body">
+            <h3>RFM Customer Segmentation (Excel)</h3>
+            <p>End-to-end RFM pipeline with dynamic dashboard for Champions, Loyal, At-Risk cohorts and behavioral
+              filtering.</p>
+            <div class="badges"><span class="badge">Excel</span><span class="badge">RFM</span><span
+                class="badge">Segmentation</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Quantile-based R/F/M scoring</li>
+                <li>10 RFM segments visualized</li>
+                <li>Targeting insights for CRM</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/RFM_Dashboard" target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="Shipping boxes on a conveyor belt, representing e-commerce order fulfillment"
+              src="project thumbnail\Order Profitability & Segmentation.png" /></div>
+          <div class="card-body">
+            <h3>Order Profitability & Segmentation</h3>
+            <p>Value tiers (Low→Very High) with profitability focus; 80/20 dynamics exposed via interactive Excel
+              dashboard.</p>
+            <div class="badges"><span class="badge">Excel</span><span class="badge">Segmentation</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>62% of orders = Low value</li>
+                <li>Very-High orders disproportionately profitable</li>
+                <li>Target retention & upsell plays</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Order-Segment-Analysis" target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="Financial documents and a calculator, representing financial data analysis"
+              src="project thumbnail\SEC EDGAR Data Pipeline & Analysis.png" />
+          </div>
+          <div class="card-body">
+            <h3>SEC EDGAR Data Pipeline & Analysis</h3>
+            <p>Python-to-Excel pipeline for 10-Q KPIs (EPS, Net Income, Revenue) and multi-company quarterly slicers.
+            </p>
+            <div class="badges"><span class="badge">Python</span><span class="badge">Excel</span><span
+                class="badge">Finance</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Pandas ETL on SEC sub/num files</li>
+                <li>Trend PivotCharts, integrity kept for missing revenue</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Global-Company-Financial-Analysis"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="A screen showing social media icons and marketing analytics charts"
+              src="project thumbnail\Digital Marketing Campaign Performance.png" />
+          </div>
+          <div class="card-body">
+            <h3>Digital Marketing Campaign Performance</h3>
+            <p>Unified Excel ROI dashboard across Google, Facebook, Instagram; KPI cards and comparative filtering.</p>
+            <div class="badges"><span class="badge">Excel</span><span class="badge">Marketing</span><span
+                class="badge">ROI</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>CTR, CPA, ROI engineered</li>
+                <li>Instagram ROI ≈ 410% (example)</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Digital-Marketing-Campaign-Performance-Dashboard"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="A smartphone displaying the YouTube logo and analytics graphs"
+              src="project thumbnail\Interactive YouTube Channel Analytics.png" />
+          </div>
+          <div class="card-body">
+            <h3>Interactive YouTube Channel Analytics</h3>
+            <p>Excel BI dashboard for content, audience, revenue & traffic sources; top-10 videos and churn flow.</p>
+            <div class="badges"><span class="badge">Excel</span><span class="badge">YouTube</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Likes↔Comments scatter</li>
+                <li>Views vs revenue dual-axis</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/YouTube-Channel-Performance-Dashboard"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <!-- B) SQL Projects -->
+      <h3 style="margin:32px 0 12px">B) SQL Projects</h3>
+      <div class="grid">
+        <!-- 1 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="Interior of a modern retail store with clothing racks"
+              src="project thumbnail\Retail Sales Analysis (SQL).png" />
+          </div>
+          <div class="card-body">
+            <h3>Retail Sales Analysis (SQL)</h3>
+            <p>Notebook-driven SQLite + Pandas to answer time-series, customer/product ranking, delivery & region KPIs.
+            </p>
+            <div class="badges"><span class="badge">SQL</span><span class="badge">SQLite</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Q4 sales peaks</li>
+                <li>Tech category dominance</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Superstore_SQL_Analysis" target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="Abstract visualization of customer data points and connections"
+              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop" />
+          </div>
+          <div class="card-body">
+            <h3>RFM Customer Segmentation (SQL)</h3>
+            <p>CTE + window functions to compute R/F/M, quantile scoring, cohesive segments and reuseable workflow.</p>
+            <div class="badges"><span class="badge">SQL</span><span class="badge">RFM</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Segments: Champions, Loyal, At-Risk</li>
+                <li>Campaign-ready cohorts</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/RFM-Segmentation-SQL" target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="A world map with glowing data points and connection lines"
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop" /></div>
+          <div class="card-body">
+            <h3>Regional Sales & Profitability</h3>
+            <p>Deep-dive SQL + Python viz: margins vs revenue, monthly category trends, regional comparisons.</p>
+            <div class="badges"><span class="badge">SQL</span><span class="badge">Analytics</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Unprofitable high-sales categories flagged</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Category-Performance-Regional-Sales-Trends-Analysis"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="A group of diverse professionals in a modern office, representing HR analytics"
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" />
+          </div>
+          <div class="card-body">
+            <h3>HR Attrition & Retention</h3>
+            <p>CTEs + RANK() to analyze churn drivers, tenure risk, compensation landscape with static & interactive
+              plots.</p>
+            <div class="badges"><span class="badge">SQL</span><span class="badge">HR</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Sales dept highest attrition</li>
+                <li>
+                  < 3 years tenure most at risk</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/HR-Employee-Retention-Analysis"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="A diagram of a sales funnel with icons for each stage"
+              src="project thumbnail\E-commerce Conversion Funnel.png" />
+          </div>
+          <div class="card-body">
+            <h3>E-commerce Conversion Funnel</h3>
+            <p>Joins + CTEs to compute stage conversions; drop-off pinpointing and campaign/source attribution.</p>
+            <div class="badges"><span class="badge">SQL</span><span class="badge">Funnel</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>60% drop from landing→product</li>
+                <li>~30% cart abandonment</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Sales-Funnel-Drop-Off-Analysis"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card col-4">
+          <div class="thumb"><img
+              alt="A person analyzing charts on a laptop, representing business intelligence for online learning"
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop" />
+          </div>
+          <div class="card-body">
+            <h3>Online Learning Platform BI (SQL+Plotly)</h3>
+            <p>Answered 10 key business questions: revenue by category, completion/dropout, instructor & geo insights.
+            </p>
+            <div class="badges"><span class="badge">SQL</span><span class="badge">Plotly</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Top categories: Data Science & Design</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Online-Course-Platform-Analysis"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <!-- C) Python Projects -->
+      <h3 style="margin:32px 0 12px">C) Python Projects</h3>
+      <div class="grid">
+        <!-- 1 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="Abstract visualization of text data and network connections for NLP"
+              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop" />
+          </div>
+          <div class="card-body">
+            <h3>NLP Topic Modeling of YouTube Comments</h3>
+            <p>LDA (Gensim) on 500+ tech review comments, WordClouds + pyLDAvis; topics like “iPhone vs Samsung”.</p>
+            <div class="badges"><span class="badge">Python</span><span class="badge">NLP</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>NLTK preprocessing pipeline</li>
+                <li>8 distinct conversational themes</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Youtube-Comments-Topic-Modeling-NLP-"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="Wind turbines in a field, representing environmental and sustainability data"
+              src="project thumbnail\Automated ESG Data Extraction.png" /></div>
+          <div class="card-body">
+            <h3>Automated ESG Data Extraction</h3>
+            <p>pdfplumber + regex keyword map to extract ESG metrics across varied sustainability reports into a clean
+              CSV.</p>
+            <div class="badges"><span class="badge">Python</span><span class="badge">pdfplumber</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Carbon, Renewable %, Diversity, etc.</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Automating-ESG-Score-Extraction-from-PDF-Reports"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="Stock market ticker data displayed on a screen"
+              src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop" />
+          </div>
+          <div class="card-body">
+            <h3>News Sentiment & Stock Volatility</h3>
+            <p>End-to-end pipeline: NewsAPI + yfinance, VADER sentiment, trading/non-trading alignment, corr −0.987.</p>
+            <div class="badges"><span class="badge">Python</span><span class="badge">NLP</span><span
+                class="badge">Finance</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Daily sentiment aggregation per ticker</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn"
+                  href="https://github.com/Sourabh1710/Correlating-Financial-News-Sentiment-with-Stock-Volatility"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card col-4">
+          <div class="thumb"><img alt="A complex network graph visualization representing network analysis"
+              src="project thumbnail\Enron Email Network Analysis.png" />
+          </div>
+          <div class="card-body">
+            <h3>Enron Email Network Analysis</h3>
+            <p>NetworkX + Louvain to discover influencers (centrality) & hidden communities across 500k+ emails.</p>
+            <div class="badges"><span class="badge">Python</span><span class="badge">Graph</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>In-Degree, Betweenness, Eigenvector</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Network-Analysis-of-an-Organization-s-Email-Data"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card col-4">
+          <div class="thumb"><img
+              alt="Aerial view of a container port with shipping containers, representing supply chain logistics"
+              src="project thumbnail\Supply Chain Bottleneck Simulation.png" />
+          </div>
+          <div class="card-body">
+            <h3>Supply Chain Bottleneck Simulation</h3>
+            <p>SimPy model of a container port; stress tests for influx vs crane shortage show cascading failures.</p>
+            <div class="badges"><span class="badge">Python</span><span class="badge">SimPy</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Baseline / Influx / Resource Shortage scenarios</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Simulating-Port-Congestion-with-SimPy"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card col-4">
+          <div class="thumb"><img
+              alt="Code on a screen with financial charts blurred in the background, representing data scraping for finance"
+              src="project thumbnail\Alternative Financial Data Pipeline.png" />
+          </div>
+          <div class="card-body">
+            <h3>Alternative Financial Data Pipeline</h3>
+            <p>Custom scraping of job listing APIs (Workday, custom JSON) to build high-frequency hiring signals.</p>
+            <div class="badges"><span class="badge">Python</span><span class="badge">Scraping</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Anti-scraping analysis; Selenium plan for JS-heavy sites</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/FinTech-Scraper" target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <!-- D) Power BI Projects -->
+      <h3 style="margin:32px 0 12px">D) Power BI Projects</h3>
+      <div class="grid">
+        <article class="card col-6">
+          <div class="thumb"><img alt="A Power BI dashboard showing various charts and KPIs"
+              src="project thumbnail\Online Course Performance Analysis (Power BI).png" /></div>
+          <div class="card-body">
+            <h3>Online Course Performance Analysis (Power BI)</h3>
+            <p>Advanced Power Query, RANKX measures, custom word cloud (multi-word skills) for growth insights.</p>
+            <div class="badges"><span class="badge">Power BI</span><span class="badge">DAX</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Standardized durations; unpivot multi-instructor</li>
+                <li>Insights: Subtitles ↗ correlates with views</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Online-Course-Analytics-Dashboard"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card col-6">
+          <div class="thumb"><img
+              alt="A warehouse with shelves of boxes, representing vendor and supply chain management"
+              src="project thumbnail\Vendor Performance Analysis (End-to-End).png" />
+          </div>
+          <div class="card-body">
+            <h3>Vendor Performance Analysis (End-to-End)</h3>
+            <p>CSV→SQLite via Python, engineered metrics (Margin, Turnover), interactive PBI dashboard.</p>
+            <div class="badges"><span class="badge">Power BI</span><span class="badge">SQL</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>66% purchase dependency on top vendors</li>
+                <li>Target Brands: high margin, low sales</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Retail-Vendor-Performance-Analysis-Dashboard"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <!-- E) ML Projects -->
+      <h3 style="margin:32px 0 12px">E) Machine Learning Projects</h3>
+      <div class="grid">
+        <article class="card col-4">
+          <div class="thumb"><img alt="Close-up of industrial machinery with sensors, for predictive maintenance"
+              src="project thumbnail\Predictive Maintenance (APS).png" />
+          </div>
+          <div class="card-body">
+            <h3>Predictive Maintenance (APS)</h3>
+            <p>XGBoost on imbalanced sensor data, rolling features, SHAP explanations, Streamlit app & cost analysis.
+            </p>
+            <div class="badges"><span class="badge">XGBoost</span><span class="badge">SHAP</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Est. savings: $1.6M on test set</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/predictive-maintenance-truck-fleet"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <div class="thumb"><img alt="A person holding a phone with a rapidly growing graph, representing virality"
+              src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1200&auto=format&fit=crop" />
+          </div>
+          <div class="card-body">
+            <h3>YouTube Virality Prediction Engine</h3>
+            <p>Archetype classification (DTW K-Means) + per-archetype LSTM 7-day forecast, Streamlit UI.</p>
+            <div class="badges"><span class="badge">DTW</span><span class="badge">LSTM</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>XGBoost for archetype prediction</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Youtube-Virality-Prediction-Engine"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <div class="thumb"><img alt="A credit card and a lock, symbolizing financial fraud detection and security"
+              src="project thumbnail\FinTech Fraud Detection (XAI).png" />
+          </div>
+          <div class="card-body">
+            <h3>FinTech Fraud Detection (XAI)</h3>
+            <p>Autoencoder anomaly detection, SHAP explanations, top-10% review threshold for ops efficiency.</p>
+            <div class="badges"><span class="badge">Autoencoder</span><span class="badge">XAI</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>+37% lift vs random sampling</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Fintech-Fraud-Detection" target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <div class="thumb"><img
+              alt="Two groups of people separated, representing A/B testing for causal uplift modeling"
+              src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?q=80&w=1200&auto=format&fit=crop" />
+          </div>
+          <div class="card-body">
+            <h3>Causal Uplift Modeling</h3>
+            <p>T-Learner (causalml), custom Uplift/Qini implementation, campaign optimization strategy.</p>
+            <div class="badges"><span class="badge">Causal ML</span><span class="badge">Uplift</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Top 30% captures >80% total lift</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/Advanced-Causal-Inference"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <div class="thumb"><img alt="Robotic arms working on an assembly line in a smart factory"
+              src="https://images.unsplash.com/photo-1567789884554-0b844b597180?q=80&w=1200&auto=format&fit=crop" />
+          </div>
+          <div class="card-body">
+            <h3>Factory Optimization (RL)</h3>
+            <p>Custom Gymnasium env + PPO; reward shaping for energy/time trade-offs; emergent cluster strategies.</p>
+            <div class="badges"><span class="badge">RL</span><span class="badge">PPO</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Dynamic task allocation policy</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/RL-Smart-Factory-Scheduler"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <div class="thumb"><img alt="A futuristic robot analyzing financial data on a holographic screen"
+              src="project thumbnail\AI Financial Research Assistant.png" /></div>
+          <div class="card-body">
+            <h3>AI Financial Research Assistant</h3>
+            <p>T5/BART summarization + KeyBERT themes, sentiment highlighting, Gradio interface.</p>
+            <div class="badges"><span class="badge">Transformers</span><span class="badge">Gradio</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Reduces review time by 90%+</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/NLP-for-Automated-Financial-Document-Summarization"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <!-- F) MLOps Projects -->
+      <h3 style="margin:32px 0 12px">F) MLOps Projects</h3>
+      <div class="grid">
+        <article class="card col-4">
+          <div class="thumb"><img alt="Gears and cogs moving together, representing an automated CI/CD pipeline"
+              src="project thumbnail\Automated AI Governance (Fairness).png" /></div>
+          <div class="card-body">
+            <h3>Automated AI Governance (Fairness)</h3>
+            <p>CI/CD with GitHub Actions + Fairlearn parity checks; pipeline blocks biased models by design.</p>
+            <div class="badges"><span class="badge">CI/CD</span><span class="badge">Fairlearn</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Demographic Parity threshold gate</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/justice-fairness-cicd" target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <div class="thumb"><img
+              alt="A server room with glowing racks, representing scalable cloud infrastructure on AWS"
+              src="project thumbnail\Scalable AWS MLOps (Realtime).png" />
+          </div>
+          <div class="card-body">
+            <h3>Scalable AWS MLOps (Realtime)</h3>
+            <p>Fargate service + SQS buffering + DynamoDB storage; resolved Docker & cloud deployment hurdles.</p>
+            <div class="badges"><span class="badge">AWS</span><span class="badge">Fargate</span><span
+                class="badge">SQS/DynamoDB</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Decoupled, event-driven microservices</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/scalable-mlops-predictive-maintenance"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card col-4">
+          <div class="thumb"><img
+              alt="A scientist in a lab coat looking at data, representing reproducible scientific experiments"
+              src="project thumbnail\Reproducible Causal Inference (MLOps).png" />
+          </div>
+          <div class="card-body">
+            <h3>Reproducible Causal Inference (MLOps)</h3>
+            <p>DoWhy + DVC (S3) + MLflow; sensitivity tests; versioned experiments show robust lift changes.</p>
+            <div class="badges"><span class="badge">DoWhy</span><span class="badge">DVC</span><span
+                class="badge">MLflow</span></div>
+            <details>
+              <summary>Details</summary>
+              <ul>
+                <li>Lift: $3.41 → $3.65 after outlier removal</li>
+              </ul>
+              <div class="link-row">
+                <a class="btn" href="https://github.com/Sourabh1710/reproducible-causal-inference-pipeline"
+                  target="_blank">GitHub</a>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs" class="section">
+    <div class="container">
+      <h2>Certifications</h2>
+      <div class="grid">
+        <div class="col-12 cert">
+          <div>
+            <strong>Excel Skills for Business: Essentials</strong> — Macquarie University (Coursera)
+          </div>
+          <a class="btn" href="https://drive.google.com/file/d/1AKrSdEadtujIY_Oq6iwFzRVbIa-9mF_2/view?usp=sharing"
+            target="_blank">Verify</a>
+        </div>
+        <div class="col-12 cert">
+          <div>
+            <strong>Excel Skills for Business: Advanced</strong> — Macquarie University (Coursera)
+          </div>
+          <a class="btn" href="https://drive.google.com/file/d/1suPmVOZSSSNyGKJQ7m6Buhj2Y1SEdJz8/view?usp=sharing"
+            target="_blank">Verify</a>
+        </div>
+        <div class="col-12 cert">
+          <div>
+            <strong>Basic Statistics</strong> — University of Amsterdam (Coursera)
+          </div>
+          <a class="btn" href="https://drive.google.com/file/d/1ZVBYzzcUxwtBhp-Wb-zyH-AY9NM6PmQH/view?usp=sharing"
+            target="_blank">Verify</a>
+        </div>
+        <div class="col-12 cert">
+          <div>
+            <strong>Kaggle Micro-Courses</strong> — Python, Pandas, Viz, SQL (Intro+Advanced), Cleaning, FE, ML, Deep
+            Learning, Explainability, Time Series
+          </div>
+          <a class="btn" href="https://drive.google.com/drive/folders/1DzcJw6rX4UjEbZvSZcay6wK12G-FnJ8d?usp=sharing"
+            target="_blank">Verify</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact</h2>
+      <div class="contact">
+        <form action="https://formspree.io/f/mblkwngq" method="POST">
+          <div class="row">
+            <div>
+              <label for="name">Your Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Your Email</label>
+              <input id="email" name="_replyto" type="email" placeholder="name@email.com" required />
+            </div>
+            <div style="grid-column:1/-1">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea>
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <button class="btn primary" type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <!-- This div will now hold our icons -->
+      <div class="footer-links">
+        <a id="emailLink" href="mailto:sourabhsonker17@gmail.com" target="_blank" title="Email">
+          <img src="icons/gmail.png" alt="Email Icon">
+        </a>
+        <a href="https://www.linkedin.com/in/sourabh-sonker-620600236/" target="_blank" title="LinkedIn">
+          <img src="icons/linkedin.png" alt="LinkedIn Icon">
+        </a>
+        <a href="https://github.com/Sourabh1710" target="_blank" title="GitHub">
+          <img src="icons/github.png" alt="GitHub Icon">
+        </a>
+      </div>
+      © <span id="year"></span> Sourabh Sonker · Built with HTML/CSS/JS
+    </div>
+  </footer>>
+
+
+  <script>
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
+      });
+    });
+
+    // Theme toggle with localStorage
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const key = 'pref-theme';
+    const saved = localStorage.getItem(key);
+    if (saved) { root.setAttribute('data-theme', saved) }
+
+    toggle.addEventListener('click', () => {
+      const now = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', now);
+      localStorage.setItem(key, now);
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Email link enhancement: If Gmail is default for browser, open Gmail compose, else fallback to mailto
+    document.getElementById('emailLink').addEventListener('click', function (e) {
+      // Check if user is on Gmail in browser (simple heuristic)
+      if (navigator.userAgent.includes('Chrome') || navigator.userAgent.includes('Firefox')) {
+        e.preventDefault();
+        window.open('https://mail.google.com/mail/?view=cm&to=sourabhsonker17@gmail.com', '_blank');
+      }
+    });
+
+    // Form AJAX submission to keep user on page and clear form
+    document.querySelector('#contact form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        alert('Thanks for your message!');
+        form.reset();
+      } else {
+        alert('Oops! Something went wrong.');
+      }
+    });
+  </script>
+</body>
+
+</html>
